@@ -1,0 +1,34 @@
+==== Trappiste ====
+
+Trappiste is a small program to help (net|sys)admins to
+backup cisco switches & routers configs in git without having
+any action to do.
+
+When you write the config a trap is sent to a snmptrapd that 
+handles it by forwarding to the script
+
+===== Installation =====
+
+You will need the following perl modules
+
+- SNMP::Trapinfo
+- Git::Repository
+- AppConfig
+
+===== Companions ===== 
+
+You wil also need a tftp server, snmptrapd, git and the cisco MIBS
+
+Configuration for snmpdtrapd (from net-snmp) :
+
+  authCommunity log,execute,net <yourcommunity>
+  traphandle default /path/to/trappiste.pl
+
+Configuration for your network device :
+  snmp-server community <omgsecret> RW
+  snmp-server enable traps config
+  snmp-server host <mighty host> <yourcommunity> config
+  
+===== Use =====
+
+trappiste is a beerware, if you use it and that we meet you may offer me a beer (belgian beer > *)
